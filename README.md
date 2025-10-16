@@ -1,50 +1,142 @@
-# Welcome to your Expo app 👋
+# 🛒 React-Mobile-Loja
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicativo mobile desenvolvido em **React Native** utilizando o **Expo Go**, como parte do projeto da disciplina **Programação para Dispositivos Móveis** da **Faculdade Estácio – Polo Nova Iguaçu**.
 
-## Get started
+O app simula o funcionamento de um **mercadinho de bairro**, permitindo que o usuário navegue por produtos, visualize preços e adicione itens ao carrinho — trazendo uma experiência simples e intuitiva de compra.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 👥 Integrantes do Grupo
 
-2. Start the app
+- **Leandra**
+- **João Pedro**
+- **Tarcisio Carneiro**
+- **Guilherme**
+- **Victor**
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🚀 Tecnologias Utilizadas
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- [React Native](https://reactnative.dev/)
+- [Expo Go](https://expo.dev/go)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [React Navigation](https://reactnavigation.org/)
+- [Expo Router](https://expo.dev/router)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 🧭 Funcionalidades Principais
 
-When you're ready, run:
+- 🛍️ **Listagem de produtos:** exibe os produtos disponíveis no mercado.  
+- 💰 **Visualização de preços:** mostra o valor atualizado de cada item.  
+- 🧺 **Carrinho de compras:** o usuário pode adicionar e remover produtos.  
+- 🔎 **Busca de produtos:** pesquisa rápida por nome ou categoria.  
+- 📱 **Interface responsiva:** adaptada para diferentes tamanhos de tela.
+
+---
+
+## ⚙️ Como executar o projeto
+
+### 🔹 1. Clonar o repositório
 
 ```bash
-npm run reset-project
+git clone https://github.com/serya012/React-Mobile-Loja.git
+````
+
+### 🔹 2. Acessar o diretório do projeto
+
+```bash
+cd React-Mobile-Loja
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 🔹 3. Instalar as dependências
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 🔹 4. Iniciar o aplicativo
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo start
+```
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 📲 Como testar no celular (usando o Expo Go)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1. Instale o app **Expo Go** na **Play Store** ou **App Store**.
+2. No terminal, execute o comando `npx expo start`.
+3. Escaneie o **QR Code** exibido no terminal ou no navegador com o **Expo Go**.
+4. O aplicativo abrirá automaticamente no seu dispositivo.
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+
+📦 React-Mobile-Loja
+┣ 📂 .expo
+┣ 📂 .vscode
+┣ 📂 app
+┃ ┣ 📂 (tabs)
+┃ ┃ ┣ 📜 _layout.tsx
+┃ ┃ ┣ 📜 explore.tsx
+┃ ┃ ┣ 📜 index.tsx
+┃ ┃ ┗ 📜 modal.tsx
+┃ ┣ 📂 assets
+┃ ┣ 📂 components
+┃ ┣ 📂 constants
+┃ ┣ 📂 hooks
+┃ ┗ 📂 scripts
+┣ 📂 node_modules
+┣ 📜 .gitignore
+┣ 📜 app.json
+┣ 📜 eslint.config.js
+┣ 📜 expo-env.d.ts
+┣ 📜 package-lock.json
+┣ 📜 package.json
+┣ 📜 README.md
+┗ 📜 tsconfig.json
+
+```
+
+
+---
+
+## 🏁 Status do Projeto
+
+📊 **Progresso:** ▓░░░░░░░░░░░░░░░ 5%
+
+Atualmente estamos desenvolvendo a **estrutura base e a navegação entre telas**.
+As próximas etapas incluem o design da interface, a integração do carrinho e o cadastro de produtos de forma dinâmica.
+
+---
+
+## 📚 Referências
+
+* [Documentação do Expo](https://docs.expo.dev/)
+* [Documentação do React Native](https://reactnative.dev/docs/getting-started)
+* [React Navigation](https://reactnavigation.org/docs/getting-started/)
+* [Guia de instalação do Expo CLI](https://docs.expo.dev/get-started/installation/)
+
+---
+
+## 🎓 Faculdade Estácio de Sá
+
+**Curso:** Análise e Desenvolvimento de Sistemas
+
+**Polo:** Nova Iguaçu
+
+**Disciplina:** Programação para Dispositivos Móveis
+
+**Ano/Semestre:** 2025.2
+
+
+
+---
+
+

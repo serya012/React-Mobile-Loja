@@ -1,112 +1,198 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
+type ProdutoType = {
+  nome: string;
+  preco: number;
+  qtd: number;
+};
 
-export default function TabTwoScreen() {
+type ProdutoProps = {
+  item: ProdutoType;
+  remover: (item: ProdutoType) => void;
+  incrementar: (item: ProdutoType) => void;
+  decrementar: (item: ProdutoType) => void;
+};
+
+const Produto = ({ item, remover, incrementar, decrementar }: ProdutoProps) => (
+  <View style={styles.item}>
+    <View style={styles.infoContainer}>
+      <Text style={styles.itemText}>{item.nome}</Text>
+      <Text style={styles.precoText}>Preço unitário: R$ {item.preco.toFixed(2)}</Text>
+      <Text style={styles.precoText}>Subtotal: R$ {(item.preco * item.qtd).toFixed(2)}</Text>
+    </View>
+    <View style={styles.controle}>
+      <Button title="➖" onPress={() => decrementar(item)} />
+      <Text style={styles.quantidade}>{item.qtd}</Text>
+      <Button title="➕" onPress={() => incrementar(item)} />
+      <TouchableOpacity onPress={() => remover(item)}>
+        <Text style={styles.removeText}>❌</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+);
+
+export default function App() {
+  const [produtos, setProdutos] = useState<ProdutoType[]>([
+    { nome: "Arroz", preco: 5.5, qtd: 1 },
+    { nome: "Feijão", preco: 8.75, qtd: 1 },
+    { nome: "Coca-Cola", preco: 5.50, qtd: 1 },
+  ]);
+
+  const [novoNome, setNovoNome] = useState("");
+  const [novoPreco, setNovoPreco] = useState("");
+
+  const adicionar = () => {
+    if (novoNome.trim() !== "" && !isNaN(parseFloat(novoPreco))) {
+      setProdutos([...produtos, { 
+        nome: novoNome, 
+        preco: parseFloat(novoPreco), 
+        qtd: 1 
+      }]);
+      setNovoNome("");
+      setNovoPreco("");
+    }
+  };
+
+  const remover = (item: ProdutoType) => {
+    setProdutos(produtos.filter((p) => p !== item));
+  };
+
+  const incrementar = (item: ProdutoType) => {
+    setProdutos(
+      produtos.map((p) => (p === item ? { ...p, qtd: p.qtd + 1 } : p))
+    );
+  };
+
+  const decrementar = (item: ProdutoType) => {
+    if (item.qtd > 1) {
+      setProdutos(
+        produtos.map((p) => (p === item ? { ...p, qtd: p.qtd - 1 } : p))
+      );
+    } else {
+      remover(item);
+    }
+  };
+
+  const total = produtos.reduce((acc, p) => acc + p.preco * p.qtd, 0);
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
+    <View style={styles.container}>
+      <Text style={styles.titulo}>🏬 Mercado do ouro ⭐</Text>
+      <Text style={styles.subtitulo}>Produto do dia: Coca-Cola</Text>
+      
+      <Text style={styles.listaTitulo}>📋 Carrinho:</Text>
+
+      {produtos.length === 0 ? (
+        <Text style={styles.vazio}>Nenhum produto no carrinho 😢</Text>
+      ) : (
+        <FlatList
+          data={produtos}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <Produto
+              item={item}
+              remover={remover}
+              incrementar={incrementar}
+              decrementar={decrementar}
+            />
+          )}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Explore
-        </ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+      )}
+
+      <Text style={styles.total}>💰 Total do carrinho: R$ {total.toFixed(2)}</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome do produto"
+        value={novoNome}
+        onChangeText={setNovoNome}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Preço do produto"
+        value={novoPreco}
+        onChangeText={setNovoPreco}
+        keyboardType="numeric"
+      />
+      <Button title="➕ Adicionar Produto" onPress={adicionar} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: { 
+    flex: 1, 
+    padding: 20, 
+    backgroundColor: "#F5F5F5" 
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  titulo: { 
+    fontSize: 20, 
+    fontWeight: "bold", 
+    marginBottom: 5 
+  },
+  subtitulo: { 
+    fontSize: 18, 
+    marginBottom: 2 
+  },
+  listaTitulo: { 
+    fontSize: 18, 
+    marginVertical: 10, 
+    fontWeight: "600" 
+  },
+  item: { 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center",
+    padding: 10, 
+    marginVertical: 5, 
+    backgroundColor: "#FFF", 
+    borderRadius: 8, 
+    elevation: 2, 
+  },
+  infoContainer: {
+    flex: 1,
+  },
+  itemText: { 
+    fontSize: 15,
+    fontWeight: "bold"
+  },
+  precoText: { 
+    fontSize: 12, 
+    color: "#555" 
+  },
+  removeText: { 
+    color: "red", 
+    fontWeight: "bold", 
+    marginLeft: 5, 
+    fontSize: 16 
+  },
+  controle: { 
+    flexDirection: "row", 
+    alignItems: "center" 
+  },
+  quantidade: { 
+    marginHorizontal: 10, 
+    fontSize: 16,
+    fontWeight: "bold"
+  },
+  vazio: { 
+    fontSize: 16, 
+    fontStyle: "italic", 
+    color: "#555", 
+    marginBottom: 10 
+  },
+  input: { 
+    borderWidth: 1, 
+    borderColor: "#CCC", 
+    borderRadius: 8, 
+    padding: 10, 
+    marginVertical: 5, 
+    backgroundColor: "#FFF", 
+  },
+  total: { 
+    fontSize: 18, 
+    fontWeight: "bold", 
+    marginVertical: 10 
   },
 });

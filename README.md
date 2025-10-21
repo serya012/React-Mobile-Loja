@@ -113,7 +113,7 @@ npx expo start
 
 ## 🏁 Status do Projeto
 
-📊 **Progresso:** ▓░░░░░░░░░░░░░░░ 5%
+📊 **Progresso:** ▓▓▓▓▓▓▓▓▓░░░░░░░░░░ 45%
 
 Atualmente estamos desenvolvendo a **estrutura base e a navegação entre telas**.
 As próximas etapas incluem o design da interface, a integração do carrinho e o cadastro de produtos de forma dinâmica.

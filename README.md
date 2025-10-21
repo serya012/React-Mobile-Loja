@@ -11,7 +11,7 @@ O app simula o funcionamento de um **mercadinho de bairro**, permitindo que o us
 - **Leandra**
 - **João Pedro**
 - **Tarcisio Carneiro**
-- **Guilherme**
+- **Luiz Guilherme**
 - **Victor**
 
 ---

@@ -76,23 +76,29 @@ npx expo start
 
 ## 📁 Estrutura do Projeto
 
-```
 
+```
 📦 React-Mobile-Loja
-┣ 📂 .expo
-┣ 📂 .vscode
 ┣ 📂 app
 ┃ ┣ 📂 (tabs)
 ┃ ┃ ┣ 📜 _layout.tsx
+┃ ┃ ┣ 📜 carrinho.tsx
+┃ ┃ ┣ 📜 catalogo.tsx
 ┃ ┃ ┣ 📜 explore.tsx
 ┃ ┃ ┣ 📜 index.tsx
+┃ ┃ ┣ 📜 produtos.tsx
+┃ ┃ ┗ 📜 _layout.tsx
+┃ ┗ 📂 modal
 ┃ ┃ ┗ 📜 modal.tsx
-┃ ┣ 📂 assets
-┃ ┣ 📂 components
-┃ ┣ 📂 constants
-┃ ┣ 📂 hooks
-┃ ┗ 📂 scripts
+┣ 📂 assets
+┣ 📂 components
+┣ 📂 constants
+┣ 📂 hooks
+┣ 📂 lib
+┃ ┗ 📜 database.ts
 ┣ 📂 node_modules
+┣ 📂 scripts
+┣ 📂 styles
 ┣ 📜 .gitignore
 ┣ 📜 app.json
 ┣ 📜 eslint.config.js
@@ -101,9 +107,7 @@ npx expo start
 ┣ 📜 package.json
 ┣ 📜 README.md
 ┗ 📜 tsconfig.json
-
 ```
-
 
 ---
 

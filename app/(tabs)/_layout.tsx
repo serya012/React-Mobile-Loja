@@ -16,6 +16,8 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
       }}>
+
+
       <Tabs.Screen
         name="index"
         options={{
@@ -23,6 +25,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Ionicons name="home" size={28} color={color} />,
         }}
       />
+
+
       <Tabs.Screen
         name="catalogo"
         options={{
@@ -30,6 +34,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <MaterialIcons name="grid-view" size={28} color={color} />,
         }}
       />
+
+
       <Tabs.Screen
         name="carrinho"
         options={{
@@ -37,6 +43,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <FontAwesome5 name="shopping-cart" size={28} color={color} />,
         }}
       />
+
+
       <Tabs.Screen
         name="produtos"
         options={{
@@ -44,6 +52,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <FontAwesome5 name="boxes" size={28} color={color} />,
         }}
       />
+
+
       <Tabs.Screen
         name="explore"
         options={{
@@ -51,13 +61,9 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <MaterialIcons name="analytics" size={28} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="teste-icones"
-        options={{
-          title: 'Testar Ícones',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="shape" size={28} color={color} />,
-        }}
-      />
+
+
+      
     </Tabs>
   );
 }

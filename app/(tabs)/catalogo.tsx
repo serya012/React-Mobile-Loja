@@ -215,9 +215,7 @@ export default function CatalogoScreen() {
         />
       )}
 
-      <Link href="/" style={styles.voltarLink}>
-        <ThemedText type="link">← Voltar para o Início</ThemedText>
-      </Link>
+    
     </ThemedView>
   );
 }

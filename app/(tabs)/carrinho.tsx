@@ -225,9 +225,6 @@ export default function CarrinhoScreen() {
                 </>
             )}
 
-            <Link href="/catalogo" style={styles.voltarLink}>
-                <ThemedText type="link">← Continuar Comprando</ThemedText>
-            </Link>
         </ThemedView>
     );
 }

@@ -1,112 +1,265 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Alert,
     FlatList,
     TouchableOpacity,
-    View
+    View,
+    StyleSheet
 } from 'react-native';
-import { database } from '../../lib/database';
-import styles from '../../styles/carrinho.styles';
+import { useThemeColor } from '@/hooks/use-theme-color';
 
-interface CarrinhoComProduto {
+interface ProdutoFavorito {
     id: string;
-    produtoId: string;
+    nome: string;
+    preco: number;
+    imagem: string;
+    categoria: string;
     quantidade: number;
-    precoUnitario: number;
-    adicionadoEm: string;
-    produto?: {
-        id: string;
-        nome: string;
-        preco: number;
-        estoque: number;
-        categoria: string;
-    } | undefined;
 }
 
-export default function CarrinhoScreen() {
-    const [itensCarrinho, setItensCarrinho] = useState<CarrinhoComProduto[]>([]);
-    const [carregando, setCarregando] = useState(true);
+// Dados estáticos de exemplo para favoritos
+const favoritosIniciais: ProdutoFavorito[] = [
+    {
+        id: '1',
+        nome: 'Café 3 Corações',
+        preco: 16.90,
+        imagem: '☕',
+        categoria: 'mercearia',
+        quantidade: 1
+    },
+    {
+        id: '2', 
+        nome: 'Leite Integral',
+        preco: 5.20,
+        imagem: '🥛',
+        categoria: 'laticinios',
+        quantidade: 2
+    }
+];
 
-    useEffect(() => {
-        carregarCarrinho();
-    }, []);
+export default function FavoritosScreen() {
+    const [favoritos, setFavoritos] = useState<ProdutoFavorito[]>(favoritosIniciais);
+    
+    const backgroundColor = useThemeColor({}, 'background');
+    const textColor = useThemeColor({}, 'text');
+    const cardColor = useThemeColor({}, 'card');
+    const borderColor = useThemeColor({}, 'border');
+    const primaryColor = useThemeColor({}, 'primary');
+    const errorColor = useThemeColor({}, 'error');
 
-    const carregarCarrinho = async () => {
-        try {
-            const itens = await database.buscarCarrinho();
-            setItensCarrinho(itens);
-        } catch (error) {
-            Alert.alert('Erro', 'Erro ao carregar carrinho');
-        } finally {
-            setCarregando(false);
-        }
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: backgroundColor,
+        },
+        header: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 20,
+            paddingTop: 60,
+            paddingBottom: 20,
+            backgroundColor: backgroundColor,
+            borderBottomWidth: 1,
+            borderBottomColor: borderColor,
+        },
+        limparTexto: {
+            color: errorColor,
+            fontWeight: '600',
+            fontSize: 14,
+        },
+        lista: {
+            flex: 1,
+        },
+        listaConteudo: {
+            padding: 20,
+            paddingBottom: 120,
+        },
+        itemFavorito: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: 16,
+            marginBottom: 12,
+            backgroundColor: cardColor,
+            borderRadius: 16,
+            borderLeftWidth: 4,
+            borderLeftColor: primaryColor,
+        },
+        itemInfo: {
+            flex: 1,
+            marginRight: 12,
+        },
+        itemPreco: {
+            fontSize: 14,
+            color: textColor,
+            opacity: 0.7,
+            marginTop: 4,
+            fontWeight: '500',
+        },
+        itemSubtotal: {
+            fontSize: 15,
+            fontWeight: '700',
+            color: primaryColor,
+            marginTop: 6,
+        },
+        controles: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 16,
+        },
+        controleQuantidade: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: backgroundColor,
+            borderRadius: 12,
+            padding: 4,
+        },
+        botaoQuantidade: {
+            width: 36,
+            height: 36,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: primaryColor,
+            borderRadius: 10,
+        },
+        botaoQuantidadeTexto: {
+            color: cardColor,
+            fontWeight: 'bold',
+            fontSize: 16,
+            lineHeight: 18,
+        },
+        quantidade: {
+            marginHorizontal: 16,
+            fontSize: 16,
+            fontWeight: '700',
+            minWidth: 24,
+            textAlign: 'center',
+            color: textColor,
+        },
+        botaoRemover: {
+            padding: 10,
+            backgroundColor: backgroundColor,
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: errorColor,
+        },
+        botaoRemoverTexto: {
+            fontSize: 18,
+            color: errorColor,
+        },
+        favoritosVazio: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 40,
+        },
+        favoritosVazioTexto: {
+            fontSize: 20,
+            fontWeight: '700',
+            marginBottom: 8,
+            color: textColor,
+            opacity: 0.7,
+            textAlign: 'center',
+        },
+        favoritosVazioDescricao: {
+            fontSize: 16,
+            color: textColor,
+            opacity: 0.5,
+            marginBottom: 32,
+            textAlign: 'center',
+            lineHeight: 22,
+        },
+        botaoCatalogo: {
+            backgroundColor: primaryColor,
+            paddingHorizontal: 32,
+            paddingVertical: 16,
+            borderRadius: 12,
+        },
+        botaoCatalogoTexto: {
+            color: cardColor,
+            fontWeight: '600',
+            fontSize: 16,
+        },
+        resumo: {
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            padding: 24,
+            backgroundColor: cardColor,
+            borderTopWidth: 1,
+            borderTopColor: borderColor,
+        },
+        totalTexto: {
+            fontSize: 24,
+            color: primaryColor,
+            textAlign: 'center',
+            marginBottom: 8,
+            fontWeight: '700',
+        },
+        itensTexto: {
+            textAlign: 'center',
+            color: textColor,
+            opacity: 0.7,
+            marginBottom: 20,
+            fontSize: 14,
+            fontWeight: '500',
+        },
+        botaoFinalizar: {
+            backgroundColor: primaryColor,
+            padding: 18,
+            borderRadius: 12,
+            alignItems: 'center',
+        },
+        botaoFinalizarTexto: {
+            color: cardColor,
+            fontWeight: '600',
+            fontSize: 16,
+        },
+    });
+
+    const atualizarQuantidade = (id: string, novaQuantidade: number) => {
+        if (novaQuantidade < 1) return;
+        
+        setFavoritos(prev => 
+            prev.map(item => 
+                item.id === id ? { ...item, quantidade: novaQuantidade } : item
+            )
+        );
     };
 
-    const atualizarQuantidade = async (id: string, novaQuantidade: number) => {
-        try {
-            await database.atualizarQuantidadeCarrinho(id, novaQuantidade);
-            await carregarCarrinho();
-        } catch (error) {
-            Alert.alert('Erro', 'Erro ao atualizar quantidade');
-        }
-    };
-
-    const removerItem = async (id: string) => {
-        try {
-            await database.removerDoCarrinho(id);
-            await carregarCarrinho();
-        } catch (error) {
-            Alert.alert('Erro', 'Erro ao remover item');
-        }
-    };
-
-    const limparCarrinho = async () => {
+    const removerItem = (id: string) => {
         Alert.alert(
-            'Limpar Carrinho',
-            'Deseja remover todos os itens do carrinho?',
+            'Remover Item',
+            'Deseja remover este item dos favoritos?',
             [
                 { text: 'Cancelar', style: 'cancel' },
                 {
-                    text: 'Limpar',
+                    text: 'Remover',
                     style: 'destructive',
-                    onPress: async () => {
-                        try {
-                            await database.limparCarrinho();
-                            await carregarCarrinho();
-                        } catch (error) {
-                            Alert.alert('Erro', 'Erro ao limpar carrinho');
-                        }
+                    onPress: () => {
+                        setFavoritos(prev => prev.filter(item => item.id !== id));
                     }
                 }
             ]
         );
     };
 
-    const finalizarCompra = async () => {
-        if (itensCarrinho.length === 0) {
-            Alert.alert('Carrinho vazio', 'Adicione produtos ao carrinho antes de finalizar');
-            return;
-        }
-
+    const limparFavoritos = () => {
         Alert.alert(
-            'Finalizar Compra',
-            `Confirmar compra de ${itensCarrinho.length} itens no valor total de R$ ${calcularTotal().toFixed(2)}?`,
+            'Limpar Favoritos',
+            'Deseja remover todos os itens dos favoritos?',
             [
                 { text: 'Cancelar', style: 'cancel' },
                 {
-                    text: 'Confirmar',
-                    onPress: async () => {
-                        try {
-                            // Aqui você pode implementar a lógica de finalização da venda
-                            await database.limparCarrinho();
-                            Alert.alert('Sucesso', 'Compra finalizada com sucesso!');
-                            await carregarCarrinho();
-                        } catch (error) {
-                            Alert.alert('Erro', 'Erro ao finalizar compra');
-                        }
+                    text: 'Limpar',
+                    style: 'destructive',
+                    onPress: () => {
+                        setFavoritos([]);
                     }
                 }
             ]
@@ -114,20 +267,20 @@ export default function CarrinhoScreen() {
     };
 
     const calcularTotal = () => {
-        return itensCarrinho.reduce((total, item) =>
-            total + (item.precoUnitario * item.quantidade), 0
+        return favoritos.reduce((total, item) =>
+            total + (item.preco * item.quantidade), 0
         );
     };
 
-    const ItemCarrinho = ({ item }: { item: CarrinhoComProduto }) => (
-        <ThemedView style={styles.itemCarrinho}>
+    const ItemFavorito = ({ item }: { item: ProdutoFavorito }) => (
+        <ThemedView style={styles.itemFavorito}>
             <View style={styles.itemInfo}>
-                <ThemedText type="defaultSemiBold">{item.produto ? item.produto.nome : 'Produto removido'}</ThemedText>
+                <ThemedText type="defaultSemiBold">{item.nome}</ThemedText>
                 <ThemedText style={styles.itemPreco}>
-                    R$ {item.precoUnitario.toFixed(2)} cada
+                    R$ {item.preco.toFixed(2)} cada
                 </ThemedText>
                 <ThemedText style={styles.itemSubtotal}>
-                    Subtotal: R$ {(item.precoUnitario * item.quantidade).toFixed(2)}
+                    Subtotal: R$ {(item.preco * item.quantidade).toFixed(2)}
                 </ThemedText>
             </View>
 
@@ -160,31 +313,23 @@ export default function CarrinhoScreen() {
         </ThemedView>
     );
 
-    if (carregando) {
-        return (
-            <ThemedView style={styles.container}>
-                <ThemedText>Carregando...</ThemedText>
-            </ThemedView>
-        );
-    }
-
     return (
         <ThemedView style={styles.container}>
             <View style={styles.header}>
-                <ThemedText type="title">🛒 Carrinho</ThemedText>
-                {itensCarrinho.length > 0 && (
-                    <TouchableOpacity onPress={limparCarrinho}>
+                <ThemedText type="title">⭐ Favoritos</ThemedText>
+                {favoritos.length > 0 && (
+                    <TouchableOpacity onPress={limparFavoritos}>
                         <ThemedText style={styles.limparTexto}>Limpar</ThemedText>
                     </TouchableOpacity>
                 )}
             </View>
 
-            {itensCarrinho.length === 0 ? (
-                <ThemedView style={styles.carrinhoVazio}>
-                    <ThemedText style={styles.carrinhoVazioTexto}>
-                        Seu carrinho está vazio
+            {favoritos.length === 0 ? (
+                <ThemedView style={styles.favoritosVazio}>
+                    <ThemedText style={styles.favoritosVazioTexto}>
+                        Sua lista de favoritos está vazia
                     </ThemedText>
-                    <ThemedText style={styles.carrinhoVazioDescricao}>
+                    <ThemedText style={styles.favoritosVazioDescricao}>
                         Adicione produtos pelo catálogo
                     </ThemedText>
                     <Link href="/catalogo" asChild>
@@ -198,9 +343,9 @@ export default function CarrinhoScreen() {
             ) : (
                 <>
                     <FlatList
-                        data={itensCarrinho}
+                        data={favoritos}
                         keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => <ItemCarrinho item={item} />}
+                        renderItem={({ item }) => <ItemFavorito item={item} />}
                         style={styles.lista}
                         contentContainerStyle={styles.listaConteudo}
                     />
@@ -210,15 +355,15 @@ export default function CarrinhoScreen() {
                             Total: R$ {calcularTotal().toFixed(2)}
                         </ThemedText>
                         <ThemedText style={styles.itensTexto}>
-                            {itensCarrinho.length} ite{itensCarrinho.length > 1 ? 'ns' : 'm'}
+                            {favoritos.length} ite{favoritos.length > 1 ? 'ns' : 'm'} • {favoritos.reduce((total, item) => total + item.quantidade, 0)} unidades
                         </ThemedText>
 
                         <TouchableOpacity
                             style={styles.botaoFinalizar}
-                            onPress={finalizarCompra}
+                            onPress={() => Alert.alert('Lista de Compras', 'Esta é sua lista de compras!')}
                         >
                             <ThemedText style={styles.botaoFinalizarTexto}>
-                                💳 Finalizar Compra
+                                📝 Lista de Compras
                             </ThemedText>
                         </TouchableOpacity>
                     </ThemedView>
@@ -228,4 +373,3 @@ export default function CarrinhoScreen() {
         </ThemedView>
     );
 }
-

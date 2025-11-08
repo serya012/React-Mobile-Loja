@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { FontAwesome5, MaterialIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome5, MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 import { HapticTab } from '@/components/haptic-tab';
 import { Colors } from '@/constants/theme';
@@ -17,53 +17,45 @@ export default function TabLayout() {
         tabBarButton: HapticTab,
       }}>
 
-
       <Tabs.Screen
         name="index"
         options={{
           title: 'Início',
-          tabBarIcon: ({ color }) => <Ionicons name="home" size={28} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
         }}
       />
-
 
       <Tabs.Screen
         name="catalogo"
         options={{
           title: 'Catálogo',
-          tabBarIcon: ({ color }) => <MaterialIcons name="grid-view" size={28} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="grid-view" size={24} color={color} />,
         }}
       />
-
-
-      <Tabs.Screen
-        name="carrinho"
-        options={{
-          title: 'Carrinho',
-          tabBarIcon: ({ color }) => <FontAwesome5 name="shopping-cart" size={28} color={color} />,
-        }}
-      />
-
-
-      <Tabs.Screen
-        name="produtos"
-        options={{
-          title: 'Produtos',
-          tabBarIcon: ({ color }) => <FontAwesome5 name="boxes" size={28} color={color} />,
-        }}
-      />
-
 
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Relatórios',
-          tabBarIcon: ({ color }) => <MaterialIcons name="analytics" size={28} color={color} />,
+          title: 'Mais',
+          tabBarIcon: ({ color }) => <Ionicons name="ellipsis-horizontal" size={24} color={color} />,
         }}
       />
 
+      {/* Remove completamente as telas que não existem mais */}
+      <Tabs.Screen
+        name="carrinho"
+        options={{
+          href: null,
+        }}
+      />
 
-      
+      <Tabs.Screen
+        name="produtos"
+        options={{
+          href: null,
+        }}
+      />
+
     </Tabs>
   );
 }

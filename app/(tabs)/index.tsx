@@ -1,141 +1,29 @@
 import React from 'react';
-import { ScrollView, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { homeStyles as styles } from '../../style/homeStyles';
 
 export default function HomeScreen() {
-  const backgroundColor = useThemeColor({}, 'background');
-  const textColor = useThemeColor({}, 'text');
-  const cardColor = useThemeColor({}, 'card');
-  const borderColor = useThemeColor({}, 'border');
-  const primaryColor = useThemeColor({}, 'primary');
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: backgroundColor,
-    },
-    scrollView: {
-      flex: 1,
-    },
-    header: {
-      paddingHorizontal: 20,
-      paddingTop: 60,
-      paddingBottom: 20,
-      backgroundColor: backgroundColor,
-    },
-    subtitle: {
-      fontSize: 16,
-      color: textColor,
-      opacity: 0.7,
-      marginTop: 8,
-    },
-    menuContainer: {
-      padding: 20,
-      gap: 12,
-    },
-    menuItem: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      padding: 16,
-      backgroundColor: cardColor,
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: borderColor,
-    },
-    iconContainer: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: primaryColor,
-      marginRight: 16,
-    },
-    icon: {
-      fontSize: 20,
-      color: backgroundColor,
-    },
-    textContainer: {
-      flex: 1,
-    },
-    description: {
-      fontSize: 14,
-      color: textColor,
-      opacity: 0.7,
-      marginTop: 4,
-    },
-    destaquesSection: {
-      padding: 20,
-      paddingTop: 0,
-    },
-    destaquesGrid: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginTop: 12,
-    },
-    destaqueItem: {
-      alignItems: 'center',
-      padding: 16,
-      backgroundColor: cardColor,
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: borderColor,
-      flex: 1,
-      marginHorizontal: 4,
-    },
-    destaqueIcon: {
-      fontSize: 24,
-      marginBottom: 8,
-    },
-    destaqueNome: {
-      fontSize: 12,
-      color: textColor,
-      marginBottom: 4,
-      textAlign: 'center',
-    },
-    destaquePreco: {
-      fontSize: 14,
-      fontWeight: 'bold',
-      color: primaryColor,
-    },
-    infoSection: {
-      padding: 20,
-      paddingTop: 0,
-    },
-    infoText: {
-      fontSize: 14,
-      color: textColor,
-      opacity: 0.8,
-      lineHeight: 20,
-      marginBottom: 12,
-    },
-    infoDestaque: {
-      fontSize: 14,
-      color: primaryColor,
-      fontWeight: '600',
-    },
-  });
-
   return (
     <ThemedView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        {/* Header */}
         <View style={styles.header}>
-          <ThemedText type="title">🛒 Mercadinho do Bairro</ThemedText>
+          <ThemedText style={styles.titulo}>
+            <MaterialIcons name="store" size={28} color="#fff" /> Mercadinho São João
+          </ThemedText>
           <ThemedText style={styles.subtitle}>
             Tudo fresquinho com preço bom!
           </ThemedText>
         </View>
 
-        {/* Cards de Navegação */}
         <View style={styles.menuContainer}>
           <Link href="/catalogo" asChild>
             <TouchableOpacity style={styles.menuItem}>
               <View style={styles.iconContainer}>
-                <ThemedText style={styles.icon}>📦</ThemedText>
+                <MaterialIcons name="grid-view" size={24} color="#fff" />
               </View>
               <View style={styles.textContainer}>
                 <ThemedText type="defaultSemiBold">Ver Todos os Produtos</ThemedText>
@@ -149,7 +37,7 @@ export default function HomeScreen() {
           <Link href="/catalogo" asChild>
             <TouchableOpacity style={styles.menuItem}>
               <View style={styles.iconContainer}>
-                <ThemedText style={styles.icon}>🔥</ThemedText>
+                <MaterialIcons name="local-offer" size={24} color="#fff" />
               </View>
               <View style={styles.textContainer}>
                 <ThemedText type="defaultSemiBold">Promoções da Semana</ThemedText>
@@ -163,7 +51,7 @@ export default function HomeScreen() {
           <Link href="/catalogo" asChild>
             <TouchableOpacity style={styles.menuItem}>
               <View style={styles.iconContainer}>
-                <ThemedText style={styles.icon}>🍌</ThemedText>
+                <MaterialIcons name="spa" size={24} color="#fff" />
               </View>
               <View style={styles.textContainer}>
                 <ThemedText type="defaultSemiBold">Hortifruti Fresco</ThemedText>
@@ -175,38 +63,40 @@ export default function HomeScreen() {
           </Link>
         </View>
 
-        {/* Destaques */}
         <View style={styles.destaquesSection}>
-          <ThemedText type="subtitle">⭐ Destaques da Semana</ThemedText>
+          <ThemedText type="subtitle">
+            <Ionicons name="star" size={18} color="#ffc107" /> Destaques da Semana
+          </ThemedText>
           <View style={styles.destaquesGrid}>
             <View style={styles.destaqueItem}>
-              <ThemedText style={styles.destaqueIcon}>🫘</ThemedText>
+              <MaterialIcons name="grain" size={24} color="#28a745" />
               <ThemedText style={styles.destaqueNome}>Feijão</ThemedText>
               <ThemedText style={styles.destaquePreco}>R$ 8,50</ThemedText>
             </View>
             <View style={styles.destaqueItem}>
-              <ThemedText style={styles.destaqueIcon}>🍅</ThemedText>
+              <MaterialIcons name="eco" size={24} color="#28a745" />
               <ThemedText style={styles.destaqueNome}>Tomate</ThemedText>
               <ThemedText style={styles.destaquePreco}>R$ 6,90</ThemedText>
             </View>
             <View style={styles.destaqueItem}>
-              <ThemedText style={styles.destaqueIcon}>☕</ThemedText>
+              <MaterialIcons name="free-breakfast" size={24} color="#28a745" />
               <ThemedText style={styles.destaqueNome}>Café</ThemedText>
               <ThemedText style={styles.destaquePreco}>R$ 16,90</ThemedText>
             </View>
           </View>
         </View>
 
-        {/* Informações do Mercadinho */}
         <View style={styles.infoSection}>
-          <ThemedText type="subtitle">ℹ️ Sobre Nós</ThemedText>
+          <ThemedText type="subtitle">
+            <MaterialIcons name="info" size={18} color="#28a745" /> Sobre Nós
+          </ThemedText>
           <ThemedText style={styles.infoText}>
-            📍 Rua do Comércio, 123 - Centro{'\n'}
-            ⏰ Seg à Sex: 7h às 19h | Sáb: 7h às 13h{'\n'}
-            📞 (11) 9999-9999
+            <MaterialIcons name="location-on" size={14} color="#666" /> Rua do Comércio, 123 - Centro{'\n'}
+            <MaterialIcons name="access-time" size={14} color="#666" /> Seg à Sex: 7h às 19h | Sáb: 7h às 13h{'\n'}
+            <MaterialIcons name="phone" size={14} color="#666" /> (11) 9999-9999
           </ThemedText>
           <ThemedText style={styles.infoDestaque}>
-            🚚 Entrega grátis no bairro acima de R$ 50,00
+            <MaterialIcons name="local-shipping" size={14} color="#28a745" /> Entrega grátis no bairro acima de R$ 50,00
           </ThemedText>
         </View>
       </ScrollView>

@@ -1,219 +1,15 @@
 import React, { useState } from 'react';
-import { FlatList, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { FlatList, TextInput, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { MaterialIcons, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { produtos, categorias, Produto } from '../../data/produtos';
+import { catalogoStyles as styles } from '../../style/catalogoStyles';
 
 export default function CatalogoScreen() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('todos');
   const [termoBusca, setTermoBusca] = useState('');
 
-  const backgroundColor = useThemeColor({}, 'background');
-  const textColor = useThemeColor({}, 'text');
-  const cardColor = useThemeColor({}, 'card');
-  const borderColor = useThemeColor({}, 'border');
-  const primaryColor = useThemeColor({}, 'primary');
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: backgroundColor,
-    },
-    header: {
-      paddingHorizontal: 20,
-      paddingTop: 6,
-      paddingBottom: 15,
-      backgroundColor: backgroundColor,
-      borderBottomWidth: 1,
-      borderBottomColor: borderColor,
-    },
-    contador: {
-      marginTop: 4,
-      color: textColor,
-      opacity: 0.7,
-      fontSize: 14,
-    },
-    buscaContainer: {
-      margin: 20,
-      marginBottom: 10,
-      position: 'relative',
-    },
-    buscaInput: {
-      borderWidth: 1,
-      borderColor: borderColor,
-      borderRadius: 12,
-      padding: 16,
-      paddingRight: 45,
-      backgroundColor: cardColor,
-      fontSize: 16,
-      color: textColor,
-    },
-    limparBusca: {
-      position: 'absolute',
-      right: 15,
-      top: 15,
-      backgroundColor: '#ccc',
-      width: 24,
-      height: 24,
-      borderRadius: 12,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    limparBuscaTexto: {
-      color: '#fff',
-      fontSize: 12,
-      fontWeight: 'bold',
-    },
-    categoriasContainer: {
-      marginBottom: 20,
-    },
-    categoriasLista: {
-      paddingHorizontal: 20,
-      gap: 10,
-    },
-    categoriaItem: {
-      alignItems: 'center',
-      padding: 12,
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: borderColor,
-      minWidth: 75,
-    },
-    categoriaIcone: {
-      fontSize: 18,
-      marginBottom: 4,
-    },
-    categoriaNome: {
-      fontSize: 11,
-      textAlign: 'center',
-      color: textColor,
-      fontWeight: '500',
-    },
-    categoriaSelecionada: {
-      color: backgroundColor,
-      fontWeight: '600',
-    },
-    listaProdutos: {
-      padding: 20,
-      paddingBottom: 40,
-      gap: 12,
-    },
-    produtoCard: {
-      flexDirection: 'row',
-      padding: 16,
-      backgroundColor: cardColor,
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: borderColor,
-    },
-    produtoPromocao: {
-      borderColor: '#28a745',
-      borderWidth: 2,
-      backgroundColor: 'rgba(40, 167, 69, 0.05)',
-    },
-    produtoImagemContainer: {
-      marginRight: 16,
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'relative',
-    },
-    produtoImagem: {
-      fontSize: 36,
-    },
-    promocaoBadge: {
-      position: 'absolute',
-      top: -8,
-      right: -8,
-      backgroundColor: '#dc3545',
-      paddingHorizontal: 8,
-      paddingVertical: 3,
-      borderRadius: 10,
-    },
-    promocaoTexto: {
-      color: '#fff',
-      fontSize: 10,
-      fontWeight: 'bold',
-    },
-    produtoInfo: {
-      flex: 1,
-    },
-    produtoNome: {
-      fontSize: 16,
-      marginBottom: 2,
-      color: textColor,
-    },
-    produtoMarca: {
-      fontSize: 12,
-      color: textColor,
-      opacity: 0.6,
-      marginBottom: 4,
-      fontWeight: '500',
-    },
-    produtoDescricao: {
-      fontSize: 13,
-      color: textColor,
-      opacity: 0.8,
-      lineHeight: 16,
-      marginBottom: 4,
-    },
-    produtoUnidade: {
-      fontSize: 11,
-      color: textColor,
-      opacity: 0.5,
-      marginBottom: 8,
-      fontStyle: 'italic',
-    },
-    precoContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
-    produtoPreco: {
-      fontSize: 17,
-      fontWeight: 'bold',
-      color: primaryColor,
-    },
-    precoPromocao: {
-      color: '#dc3545',
-    },
-    promocaoTag: {
-      backgroundColor: '#ffc107',
-      paddingHorizontal: 8,
-      paddingVertical: 4,
-      borderRadius: 6,
-    },
-    promocaoTagTexto: {
-      color: '#000',
-      fontSize: 10,
-      fontWeight: 'bold',
-    },
-    vazio: {
-      alignItems: 'center',
-      padding: 40,
-      marginTop: 20,
-    },
-    vazioIcon: {
-      fontSize: 48,
-      marginBottom: 16,
-      opacity: 0.5,
-    },
-    vazioTexto: {
-      textAlign: 'center',
-      color: textColor,
-      opacity: 0.7,
-      fontSize: 16,
-      marginBottom: 8,
-    },
-    vazioDescricao: {
-      textAlign: 'center',
-      color: textColor,
-      opacity: 0.5,
-      fontSize: 14,
-    },
-  });
-
-  // Filtrar produtos
   const produtosFiltrados = produtos.filter(produto => {
     const categoriaMatch =
       categoriaSelecionada === 'todos' ||
@@ -234,7 +30,7 @@ export default function CatalogoScreen() {
       item.promocao && styles.produtoPromocao
     ]}>
       <View style={styles.produtoImagemContainer}>
-        <ThemedText style={styles.produtoImagem}>{item.imagem}</ThemedText>
+        <MaterialIcons name="shopping-basket" size={32} color="#28a745" />
         {item.promocao && (
           <ThemedView style={styles.promocaoBadge}>
             <ThemedText style={styles.promocaoTexto}>PROMO</ThemedText>
@@ -271,7 +67,9 @@ export default function CatalogoScreen() {
 
           {item.promocao && (
             <ThemedView style={styles.promocaoTag}>
-              <ThemedText style={styles.promocaoTagTexto}>🔥 OFERTA</ThemedText>
+              <ThemedText style={styles.promocaoTagTexto}>
+                <MaterialIcons name="local-offer" size={10} color="#000" /> OFERTA
+              </ThemedText>
             </ThemedView>
           )}
         </View>
@@ -279,40 +77,60 @@ export default function CatalogoScreen() {
     </ThemedView>
   );
 
-  const CategoriaItem = ({ categoria }: { categoria: typeof categorias[0] }) => (
-    <TouchableOpacity
-      style={[
-        styles.categoriaItem,
-        {
-          backgroundColor: categoriaSelecionada === categoria.id
-            ? '#28a745'
-            : 'transparent'
-        }
-      ]}
-      onPress={() => setCategoriaSelecionada(categoria.id)}
-    >
-      <ThemedText style={styles.categoriaIcone}>{categoria.icone}</ThemedText>
-      <ThemedText
+  const CategoriaItem = ({ categoria }: { categoria: typeof categorias[0] }) => {
+    const getCategoryIcon = (id: string) => {
+      switch(id) {
+        case 'hortifruti': return <MaterialIcons name="spa" size={20} color="#28a745" />;
+        case 'mercearia': return <FontAwesome5 name="wine-bottle" size={18} color="#28a745" />;
+        case 'laticinios': return <MaterialIcons name="local-drink" size={20} color="#28a745" />;
+        case 'bebidas': return <MaterialIcons name="local-bar" size={20} color="#28a745" />;
+        case 'limpeza': return <MaterialIcons name="cleaning-services" size={20} color="#28a745" />;
+        case 'promocoes': return <MaterialIcons name="local-offer" size={20} color="#dc3545" />;
+        default: return <MaterialIcons name="category" size={20} color="#28a745" />;
+      }
+    };
+
+    return (
+      <TouchableOpacity
         style={[
-          styles.categoriaNome,
-          categoriaSelecionada === categoria.id && styles.categoriaSelecionada
+          styles.categoriaItem,
+          {
+            backgroundColor: categoriaSelecionada === categoria.id
+              ? '#28a745'
+              : 'transparent'
+          }
         ]}
+        onPress={() => setCategoriaSelecionada(categoria.id)}
       >
-        {categoria.nome}
-      </ThemedText>
-    </TouchableOpacity>
-  );
+        {getCategoryIcon(categoria.id)}
+        <ThemedText
+          style={[
+            styles.categoriaNome,
+            categoriaSelecionada === categoria.id && styles.categoriaSelecionada
+          ]}
+        >
+          {categoria.nome}
+        </ThemedText>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <ThemedView style={styles.container}>
-      {/* Header */}
+      <View style={styles.header}>
+        <ThemedText style={styles.titulo}>
+          <MaterialIcons name="storefront" size={24} color="#fff" /> Nosso Catálogo
+        </ThemedText>
+        <ThemedText style={styles.contador}>
+          {produtosFiltrados.length} produto{produtosFiltrados.length !== 1 ? 's' : ''} encontrado{produtosFiltrados.length !== 1 ? 's' : ''}
+        </ThemedText>
+      </View>
 
-
-      {/* Barra de Busca */}
       <View style={styles.buscaContainer}>
+        <Ionicons name="search" size={20} color="#666" style={styles.buscaIcon} />
         <TextInput
           style={styles.buscaInput}
-          placeholder="🔍 Buscar"//colocar um icon
+          placeholder="Buscar produtos..."
           value={termoBusca}
           onChangeText={setTermoBusca}
           placeholderTextColor="#999"
@@ -322,12 +140,11 @@ export default function CatalogoScreen() {
             style={styles.limparBusca}
             onPress={() => setTermoBusca('')}
           >
-            <ThemedText style={styles.limparBuscaTexto}>✕</ThemedText>
+            <Ionicons name="close" size={16} color="#fff" />
           </TouchableOpacity>
         )}
       </View>
 
-      {/* Categorias */}
       <View style={styles.categoriasContainer}>
         <FlatList
           horizontal
@@ -339,7 +156,6 @@ export default function CatalogoScreen() {
         />
       </View>
 
-      {/* Produtos */}
       <FlatList
         data={produtosFiltrados}
         keyExtractor={(item) => item.id}
@@ -348,7 +164,7 @@ export default function CatalogoScreen() {
         contentContainerStyle={styles.listaProdutos}
         ListEmptyComponent={
           <ThemedView style={styles.vazio}>
-            <ThemedText style={styles.vazioIcon}>🔍</ThemedText>
+            <Ionicons name="search-outline" size={48} color="#6c757d" />
             <ThemedText style={styles.vazioTexto}>
               Nenhum produto encontrado
             </ThemedText>

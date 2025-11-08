@@ -1,13 +1,17 @@
 import React from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { exploreStyles as styles } from '../../style/exploreStyles';
 
 export default function PromocoesScreen() {
   return (
     <ScrollView style={styles.container}>
       <ThemedView style={styles.header}>
-        <ThemedText type="title">🎯 Promoções</ThemedText>
+        <ThemedText type="title">
+          <MaterialIcons name="local-offer" size={24} color="#e74c3c" /> Promoções
+        </ThemedText>
         <ThemedText style={styles.subtitulo}>
           Crie e gerencie suas ofertas
         </ThemedText>
@@ -15,8 +19,9 @@ export default function PromocoesScreen() {
 
       <ThemedView style={styles.criarPromocao}>
         <TouchableOpacity style={styles.botaoCriar}>
+          <MaterialIcons name="add-circle" size={20} color="#FFF" />
           <ThemedText style={styles.botaoCriarTexto}>
-            🏷️ Criar Nova Promoção
+            Criar Nova Promoção
           </ThemedText>
         </TouchableOpacity>
       </ThemedView>
@@ -24,6 +29,7 @@ export default function PromocoesScreen() {
       <ThemedView style={styles.promocoesAtivas}>
         <ThemedText type="subtitle">Promoções Ativas</ThemedText>
         <ThemedView style={styles.listaVazia}>
+          <Ionicons name="pricetag-outline" size={48} color="#6c757d" />
           <ThemedText style={styles.textoVazio}>Nenhuma promoção ativa</ThemedText>
           <ThemedText style={styles.descricaoVazia}>
             Crie sua primeira promoção para atrair mais clientes
@@ -32,24 +38,32 @@ export default function PromocoesScreen() {
       </ThemedView>
 
       <ThemedView style={styles.dicas}>
-        <ThemedText type="subtitle">💡 Ideias de Promoções</ThemedText>
+        <ThemedText type="subtitle">
+          <Ionicons name="bulb-outline" size={20} color="#f1c40f" /> Ideias de Promoções
+        </ThemedText>
         
         <ThemedView style={styles.dicaItem}>
-          <ThemedText type="defaultSemiBold">🎉 Oferta Relâmpago</ThemedText>
+          <ThemedText type="defaultSemiBold">
+            <MaterialIcons name="flash-on" size={16} color="#f1c40f" /> Oferta Relâmpago
+          </ThemedText>
           <ThemedText style={styles.dicaDescricao}>
             Desconto por tempo limitado
           </ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.dicaItem}>
-          <ThemedText type="defaultSemiBold">📦 Combo Especial</ThemedText>
+          <ThemedText type="defaultSemiBold">
+            <MaterialIcons name="all-inclusive" size={16} color="#f1c40f" /> Combo Especial
+          </ThemedText>
           <ThemedText style={styles.dicaDescricao}>
             Venda produtos em conjunto
           </ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.dicaItem}>
-          <ThemedText type="defaultSemiBold">👥 Leve + Pague -</ThemedText>
+          <ThemedText type="defaultSemiBold">
+            <MaterialIcons name="shopping-cart" size={16} color="#f1c40f" /> Leve + Pague -
+          </ThemedText>
           <ThemedText style={styles.dicaDescricao}>
             Promoção para itens em quantidade
           </ThemedText>
@@ -58,63 +72,3 @@ export default function PromocoesScreen() {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  header: {
-    marginBottom: 24,
-  },
-  subtitulo: {
-    fontSize: 16,
-    opacity: 0.7,
-    marginTop: 4,
-  },
-  criarPromocao: {
-    marginBottom: 24,
-  },
-  botaoCriar: {
-    backgroundColor: '#e74c3c',
-    padding: 16,
-    borderRadius: 12,
-    alignItems: 'center',
-  },
-  botaoCriarTexto: {
-    color: '#FFF',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  promocoesAtivas: {
-    marginBottom: 24,
-  },
-  listaVazia: {
-    alignItems: 'center',
-    padding: 40,
-    opacity: 0.5,
-  },
-  textoVazio: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  descricaoVazia: {
-    textAlign: 'center',
-    fontSize: 14,
-  },
-  dicas: {
-    gap: 12,
-  },
-  dicaItem: {
-    padding: 16,
-    backgroundColor: 'rgba(241, 196, 15, 0.1)',
-    borderRadius: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: '#f1c40f',
-  },
-  dicaDescricao: {
-    marginTop: 4,
-    fontSize: 14,
-    opacity: 0.7,
-  },
-});

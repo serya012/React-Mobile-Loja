@@ -74,46 +74,9 @@ npx expo start
 
 ---
 
-## 📁 Estrutura do Projeto
-
-
-```
-📦 React-Mobile-Loja
-┣ 📂 app
-┃ ┣ 📂 (tabs)
-┃ ┃ ┣ 📜 _layout.tsx
-┃ ┃ ┣ 📜 carrinho.tsx
-┃ ┃ ┣ 📜 catalogo.tsx
-┃ ┃ ┣ 📜 explore.tsx
-┃ ┃ ┣ 📜 index.tsx
-┃ ┃ ┣ 📜 produtos.tsx
-┃ ┃ ┗ 📜 _layout.tsx
-┃ ┗ 📂 modal
-┃ ┃ ┗ 📜 modal.tsx
-┣ 📂 assets
-┣ 📂 components
-┣ 📂 constants
-┣ 📂 hooks
-┣ 📂 lib
-┃ ┗ 📜 database.ts
-┣ 📂 node_modules
-┣ 📂 scripts
-┣ 📂 styles
-┣ 📜 .gitignore
-┣ 📜 app.json
-┣ 📜 eslint.config.js
-┣ 📜 expo-env.d.ts
-┣ 📜 package-lock.json
-┣ 📜 package.json
-┣ 📜 README.md
-┗ 📜 tsconfig.json
-```
-
----
-
 ## 🏁 Status do Projeto
 
-📊 **Progresso:** ▓▓▓▓▓▓▓▓▓░░░░░░░░░░ 45%
+📊 **Progresso:** ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░ 60%
 
 Atualmente estamos desenvolvendo a **estrutura base e a navegação entre telas**.
 As próximas etapas incluem o design da interface, a integração do carrinho e o cadastro de produtos de forma dinâmica.

@@ -43,7 +43,7 @@ O app simula o funcionamento de um **mercadinho de bairro**, permitindo que o us
 
 ```bash
 git clone https://github.com/serya012/React-Mobile-Loja.git
-````
+```
 
 ### 🔹 2. Acessar o diretório do projeto
 
@@ -62,6 +62,90 @@ npm install
 ```bash
 npx expo start
 ```
+
+---
+
+## 🎯 **Tutorial Completo de Instalação e Configuração**
+
+### **📥 Pré-requisitos: Instalar Node.js**
+
+1. **Acesse:** [https://nodejs.org/](https://nodejs.org/)
+2. **Baixe a versão LTS** (recomendada)
+3. **Execute o instalador** e siga as instruções padrão
+4. **Verifique a instalação** abrindo um novo terminal:
+   ```bash
+   node --version
+   npm --version
+   ```
+
+### **🛠️ Solução de Problemas Comuns**
+
+#### **Problema: Erro de execução de scripts no PowerShell**
+```
+npm : O arquivo C:\Program Files\nodejs\npm.ps1 não pode ser carregado...
+```
+
+**Solução 1: Usar Command Prompt (CMD)**
+- Abra o **CMD** (Win + R → digite `cmd`)
+- Navegue até a pasta do projeto e use os comandos npm
+
+**Solução 2: Habilitar scripts no PowerShell**
+```powershell
+# Execute como Administrador
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+#### **Problema: Comandos npm/npx não reconhecidos**
+- **Reinicie o computador** após instalar o Node.js
+- Ou **feche e reabra o terminal**
+
+### **📱 Como testar no celular**
+
+1. **Instale o Expo Go:**
+   - **Android:** [Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
+   - **iOS:** [App Store](https://apps.apple.com/br/app/expo-go/id982107779)
+
+2. **Execute o projeto:**
+   ```bash
+   npx expo start
+   ```
+
+3. **Escaneie o QR Code:**
+   - **Android:** Use o app Expo Go para escanear
+   - **iOS:** Use a câmera do iPhone
+
+### **🔧 Comandos úteis durante o desenvolvimento**
+
+```bash
+# Instalar dependências
+npm install
+
+# Iniciar o app
+npx expo start
+
+# Limpar cache (se necessário)
+npx expo start --clear
+
+# Instalar uma nova dependência
+npm install nome-da-dependencia
+```
+
+### **❌ Se encontrar erros**
+
+1. **Delete a pasta `node_modules`:**
+   ```bash
+   rm -rf node_modules
+   ```
+
+2. **Reinstale as dependências:**
+   ```bash
+   npm install
+   ```
+
+3. **Reinicie o Metro Bundler:**
+   ```bash
+   npx expo start --clear
+   ```
 
 ---
 
@@ -102,8 +186,15 @@ As próximas etapas incluem o design da interface, a integração do carrinho e 
 
 **Ano/Semestre:** 2025.2
 
+---
 
+## 📞 Suporte
+
+Se encontrar problemas durante a instalação ou execução do projeto, verifique:
+1. Se todas as dependências foram instaladas corretamente
+2. Se a versão do Node.js é compatível
+3. Se o dispositivo mobile está na mesma rede que o computador
 
 ---
 
-
+**Desenvolvido com ❤️ pelo Grupo React-Mobile-Loja**

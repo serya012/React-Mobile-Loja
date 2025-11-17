@@ -26,7 +26,7 @@ export default function HomeScreen() {
                 <MaterialIcons name="grid-view" size={24} color="#fff" />
               </View>
               <View style={styles.textContainer}>
-                <ThemedText type="defaultSemiBold">Ver Todos os Produtos</ThemedText>
+                <ThemedText style={styles.description} type="defaultSemiBold">Ver Todos os Produtos</ThemedText>
                 <ThemedText style={styles.description}>
                   Nossa seleção completa
                 </ThemedText>
@@ -40,7 +40,7 @@ export default function HomeScreen() {
                 <MaterialIcons name="local-offer" size={24} color="#fff" />
               </View>
               <View style={styles.textContainer}>
-                <ThemedText type="defaultSemiBold">Promoções da Semana</ThemedText>
+                <ThemedText style={styles.description} type="defaultSemiBold">Promoções da Semana</ThemedText>
                 <ThemedText style={styles.description}>
                   Os melhores preços
                 </ThemedText>
@@ -54,22 +54,37 @@ export default function HomeScreen() {
                 <MaterialIcons name="spa" size={24} color="#fff" />
               </View>
               <View style={styles.textContainer}>
-                <ThemedText type="defaultSemiBold">Hortifruti Fresco</ThemedText>
+                <ThemedText style={styles.description} type="defaultSemiBold">Hortifruti Fresco</ThemedText>
                 <ThemedText style={styles.description}>
                   Frutas e verduras
                 </ThemedText>
               </View>
             </TouchableOpacity>
           </Link>
+
+         <Link href="/catalogo" asChild>
+            <TouchableOpacity style={styles.menuItem}>
+              <View style={styles.iconContainer}>
+                <MaterialIcons name="spa" size={24} color="#fff" />
+              </View>
+              <View style={styles.textContainer}>
+                <ThemedText style={styles.description} type="defaultSemiBold">Hortifruti Fresco</ThemedText>
+                <ThemedText style={styles.description}>
+                  Frutas e verduras
+                </ThemedText>
+              </View>
+            </TouchableOpacity>
+          </Link>
+
         </View>
 
         <View style={styles.destaquesSection}>
-          <ThemedText type="subtitle">
-            <Ionicons name="star" size={18} color="#ffc107" /> Destaques da Semana
+          <ThemedText style={styles.description} type="subtitle">
+            <Ionicons name="star" size={25} color="#ffc107" /> Destaques da Semana
           </ThemedText>
           <View style={styles.destaquesGrid}>
             <View style={styles.destaqueItem}>
-              <MaterialIcons name="grain" size={24} color="#28a745" />
+              <MaterialIcons name="grain" size={25} color="#28a745" />
               <ThemedText style={styles.destaqueNome}>Feijão</ThemedText>
               <ThemedText style={styles.destaquePreco}>R$ 8,50</ThemedText>
             </View>
@@ -87,7 +102,7 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.infoSection}>
-          <ThemedText type="subtitle">
+          <ThemedText style={styles.infoText} type="subtitle">
             <MaterialIcons name="info" size={18} color="#28a745" /> Sobre Nós
           </ThemedText>
           <ThemedText style={styles.infoText}>

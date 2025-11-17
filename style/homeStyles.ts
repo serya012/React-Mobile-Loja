@@ -31,6 +31,7 @@ export const homeStyles = StyleSheet.create({
   menuContainer: {
     padding: 16,
     gap: 10,
+    color: '#fff',
   },
   menuItem: {
     flexDirection: 'row',
@@ -41,7 +42,7 @@ export const homeStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#dee2e6',
     elevation: 2,
-    shadowColor: '#000',
+    shadowColor: '#000000ff',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
@@ -60,7 +61,7 @@ export const homeStyles = StyleSheet.create({
   },
   description: {
     fontSize: 13,
-    color: '#666',
+    color: '#000000ff',
     marginTop: 2,
   },
   destaquesSection: {
@@ -71,6 +72,7 @@ export const homeStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
+    color: '#b51515ff'
   },
   destaqueItem: {
     alignItems: 'center',
@@ -100,7 +102,7 @@ export const homeStyles = StyleSheet.create({
     paddingTop: 0,
   },
   infoText: {
-    fontSize: 13,
+    fontSize: 15,
     color: '#666',
     lineHeight: 18,
     marginBottom: 10,
